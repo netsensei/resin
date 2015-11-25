@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Resin;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

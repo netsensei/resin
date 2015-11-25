@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Route::get('/', function () {
+    return view('index');
+}); */
+
+Route::get('/', 'HomeController@index');
+Route::get('/object', 'ObjectController@index');
+Route::post('/object/upload', 'ObjectController@upload');
+Route::get('/document', 'DocumentController@index');
+Route::post('/document/upload', 'DocumentController@upload');
+//Route::get('/document/unassigned')
+// Route::get('/overview')
+// Route::get('/import/generate')
+// Route::get('/import/download')
