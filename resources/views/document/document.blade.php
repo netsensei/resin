@@ -37,7 +37,7 @@
         @foreach ($documents as $document)
             <tr>
                 <td>{{ $document->object_number}}</td>
-                <td>{{ $document->url }}</td>
+                <td>{!! HTML::link($document->url, str_limit($document->url, 140)) !!}</td>
                 <td>{{ $document->type }}</td>
             </tr>
         @endforeach

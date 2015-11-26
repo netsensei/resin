@@ -9,9 +9,16 @@ class Document extends Model
 {
     protected $table = 'documents';
 
-    protected $fillable = ['object_number', 'url', 'type'];
+    protected $fillable = ['object_number', 'url', 'type', 'http_status'];
 
     public $timestamps = false;
+
+    public $appends = ['glyphicon'];
+
+    public function getGlyphiconAttribute()
+    {
+        return ($this->http_status == 200) ? "glyphicon-ok" : "glyphicon-remove";
+    }
 
     public static function count()
     {

@@ -17,6 +17,7 @@ class CreateDocumentsTable extends Migration
             $table->string('object_number');
             $table->string('url');
             $table->string('type');
+            $table->string('http_status');
             $table->timestamps();
         });
     }

@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Resin - Generate Resolver import files</title>
 
-    {!! Html::style('css/bootstrap.min.css') !!}
+    {!! HTML::style('css/bootstrap.min.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,6 +34,12 @@
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/object">Objects</a></li>
             <li><a href="/document">Documents</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/settings/purge">Purge database</a></li>
+              </ul>
+            </li>
           </ul>
       </div>
     </nav>

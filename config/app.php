@@ -144,7 +144,8 @@ return [
         Resin\Providers\AuthServiceProvider::class,
         Resin\Providers\EventServiceProvider::class,
         Resin\Providers\RouteServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
+        //Collective\Html\HtmlServiceProvider::class,
+        Illuminate\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -195,8 +196,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Collective\Html\FormFacade::class,
-        'Html'      => Collective\Html\HtmlFacade::class,
-
+        'Form'      => Illuminate\Html\FormFacade::class,
+        'HTML'      => Illuminate\Html\HtmlFacade::class
+        //'Html'      => Collective\Html\HtmlFacade::class,
     ],
 
 ];

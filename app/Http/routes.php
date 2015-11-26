@@ -16,6 +16,7 @@
 }); */
 
 Route::get('/', 'HomeController@index');
+Route::controller('/settings', 'SettingsController');
 Route::get('/object', 'ObjectController@index');
 Route::post('/object/upload', 'ObjectController@upload');
 Route::get('/document', 'DocumentController@index');

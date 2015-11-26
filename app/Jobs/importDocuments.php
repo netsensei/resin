@@ -4,16 +4,19 @@ namespace Resin\Jobs;
 
 use Resin\Document;
 use Resin\Jobs\Job;
+use Resin\Jobs\ChecksHTTPStatus;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use League\Csv\Reader;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Session;
 
 class ImportDocuments extends Job implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue, SerializesModels, ChecksHTTPStatus;
 
     protected $rows;
 
@@ -42,6 +45,8 @@ class ImportDocuments extends Job implements SelfHandling, ShouldQueue
                 $document->object_number = $object_number;
                 $document->url = $value;
                 $document->type = (strstr(strtolower($key), "representation")) ? "representation" : "data";
+                $document->http_status = $this->http_status($document->url);
+
                 $document->save();
             }
         }

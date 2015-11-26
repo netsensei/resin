@@ -34,7 +34,6 @@ class ObjectController extends Controller
                 $destinationPath = 'uploads'; // upload path
                 $extension = Input::file('objects_file')->getClientOriginalExtension();
                 $originalName = Input::file('objects_file')->getClientOriginalName();
-                // $fileName = $originalName.'_'.rand(11111,99999).'.'.$extension;
                 Input::file('objects_file')->move($destinationPath, $originalName);
                 Session::flash('success', 'Upload successfully');
 

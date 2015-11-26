@@ -9,9 +9,16 @@ class Object extends Model
 {
     protected $table = 'objects';
 
-    protected $fillable = ['object_number', 'title', 'work_pid'];
+    protected $fillable = ['object_number', 'title', 'work_pid', 'http_status'];
 
     public $timestamps = false;
+
+    public $appends = ['glyphicon'];
+
+    public function getGlyphiconAttribute()
+    {
+        return ($this->http_status == 200) ? "glyphicon-ok" : "glyphicon-remove";
+    }
 
     public static function count()
     {
