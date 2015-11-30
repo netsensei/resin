@@ -16,7 +16,7 @@ use Session;
 
 class ImportObjects extends Job implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels, ChecksHTTPStatus;
+    use InteractsWithQueue, SerializesModels;
 
     protected $rows;
 
@@ -41,8 +41,6 @@ class ImportObjects extends Job implements SelfHandling, ShouldQueue
             $object = Object::firstOrNew(['object_number' => $row['object_number']]);
             $object->title = $row['title'];
             $object->work_pid = $row['work_pid'];
-            $object->http_status = $this->http_status($this->work_pid);
-
             $object->save();
         }
     }

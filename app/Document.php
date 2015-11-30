@@ -13,11 +13,40 @@ class Document extends Model
 
     public $timestamps = false;
 
-    public $appends = ['glyphicon'];
+    public $appends = ['entity_type', 'format', 'enabled','representation_order', 'reference'];
 
-    public function getGlyphiconAttribute()
+    public function object()
     {
-        return ($this->http_status == 200) ? "glyphicon-ok" : "glyphicon-remove";
+        return $this->belongsTo('Resin\Object', 'object_number', 'object_number');
+    }
+
+    public function getEntityTypeAttribute()
+    {
+        return "work";
+    }
+
+    public function getEnabledAttribute()
+    {
+        return "1";
+    }
+
+    public function getFormatAttribute()
+    {
+        return ($this->type == "Data") ? "html" : "";
+    }
+
+    public function getRepresentationOrderAttribute()
+    {
+        return ($this->type == "Representation") ? $this->order : "";
+    }
+
+    public function getReferenceAttribute()
+    {
+        if ($this->type == "Representation") {
+            return ($this->order == "1") ? "1" : "0";
+        }
+
+        return NULL;
     }
 
     public static function count()

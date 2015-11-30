@@ -21,6 +21,7 @@ Route::get('/object', 'ObjectController@index');
 Route::post('/object/upload', 'ObjectController@upload');
 Route::get('/document', 'DocumentController@index');
 Route::post('/document/upload', 'DocumentController@upload');
+Route::controller('/merge', 'MergeController');
 //Route::get('/document/unassigned')
 // Route::get('/overview')
 // Route::get('/import/generate')

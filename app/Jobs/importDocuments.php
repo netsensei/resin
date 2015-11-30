@@ -16,7 +16,7 @@ use Session;
 
 class ImportDocuments extends Job implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels, ChecksHTTPStatus;
+    use InteractsWithQueue, SerializesModels;
 
     protected $rows;
 
@@ -44,8 +44,15 @@ class ImportDocuments extends Job implements SelfHandling, ShouldQueue
                 $document = Document::firstOrNew(['url' => $value]);
                 $document->object_number = $object_number;
                 $document->url = $value;
-                $document->type = (strstr(strtolower($key), "representation")) ? "representation" : "data";
-                $document->http_status = $this->http_status($document->url);
+
+                if ($key == "data") {
+                    $document->type = "data";
+                    $document->order = "";
+                } else {
+                    list($type, $order) = explode("_", $key);
+                    $document->type = $type;
+                    $document->order = (isset($order)) ? $order: "";
+                }
 
                 $document->save();
             }

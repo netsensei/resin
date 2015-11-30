@@ -34,6 +34,7 @@
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/object">Objects</a></li>
             <li><a href="/document">Documents</a></li>
+            <li><a href="/merge">Merge</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
               <ul class="dropdown-menu">

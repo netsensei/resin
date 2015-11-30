@@ -13,11 +13,9 @@ class Object extends Model
 
     public $timestamps = false;
 
-    public $appends = ['glyphicon'];
-
-    public function getGlyphiconAttribute()
+    public function documents()
     {
-        return ($this->http_status == 200) ? "glyphicon-ok" : "glyphicon-remove";
+        return $this->hasMany('Resin\Document', 'object_number', 'object_number');
     }
 
     public static function count()

@@ -33,14 +33,12 @@
                 <th>Object number</th>
                 <th>Title</th>
                 <th>Work PID</th>
-                <th>HTTP status</th>
             </tr>
         @foreach ($objects as $object)
             <tr>
                 <td>{{ $object->object_number}}</td>
                 <td>{{ $object->title }}</td>
                 <td>{!! HTML::link($object->work_pid, $object->work_pid) !!}</td>
-                <td><span class="glyphicon {{ $object->glyphicon }}" aria-hidden="true"></span></td>
             </tr>
         @endforeach
         </table>
