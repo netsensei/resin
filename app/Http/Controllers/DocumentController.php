@@ -20,6 +20,12 @@ class DocumentController extends Controller
         return view('document.document', ['documents' => $documents]);
     }
 
+    public function orphans()
+    {
+        $documents = Document::doesntHave('object')->simplePaginate(50);
+        return view('document.orphans', ['documents' => $documents]);
+    }
+
     public function upload()
     {
           $file = array('documents_file' => Input::file('documents_file'));

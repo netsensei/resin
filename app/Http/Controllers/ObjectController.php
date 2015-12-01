@@ -20,6 +20,20 @@ class ObjectController extends Controller
         return view('object.object', ['objects' => $objects]);
     }
 
+    public function withoutPid()
+    {
+        $base_query = Object::where('work_pid', '=', '');
+        $objects = $base_query->simplePaginate(20);
+        return view('object.object', ['objects' => $objects]);
+    }
+
+    public function withPid()
+    {
+        $base_query = Object::where('work_pid', '<>', '');
+        $objects = $base_query->simplePaginate(20);
+        return view('object.object', ['objects' => $objects]);
+    }
+
     public function upload()
     {
           $file = array('objects_file' => Input::file('objects_file'));

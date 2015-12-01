@@ -9,6 +9,12 @@
         @endif
 </div>
 
+<h2>Documents</h2>
+
+<p>A document is a published resource. This can be a HTML, JSON or XML document
+    or an image file. Documents can be related to objects through their associated
+    object number. The overview below displays all registered documents.</p>
+
 <div class="upload-form">
     {!! Form::open(array('url'=>'document/upload','method'=>'POST', 'files'=>true)) !!}
         <div class="form-group">
@@ -38,7 +44,7 @@
         @foreach ($documents as $document)
             <tr>
                 <td>{{ $document->object_number}}</td>
-                <td>{!! HTML::link($document->url, str_limit($document->url, 140)) !!}</td>
+                <td>{!! HTML::link($document->url, str_limit($document->url, 100)) !!}</td>
                 <td>{{ $document->type }}</td>
                 <td>{{ $document->order }}</td>
             </tr>

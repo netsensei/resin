@@ -16,13 +16,16 @@
 }); */
 
 Route::get('/', 'HomeController@index');
-Route::controller('/settings', 'SettingsController');
+
 Route::get('/object', 'ObjectController@index');
+Route::get('/object/without-pid', 'ObjectController@withoutPid');
+Route::get('/object/with-pid', 'ObjectController@withPid');
 Route::post('/object/upload', 'ObjectController@upload');
+
 Route::get('/document', 'DocumentController@index');
+Route::get('/document/orphans', 'DocumentController@orphans');
 Route::post('/document/upload', 'DocumentController@upload');
+
 Route::controller('/merge', 'MergeController');
-//Route::get('/document/unassigned')
-// Route::get('/overview')
-// Route::get('/import/generate')
-// Route::get('/import/download')
+
+Route::controller('/settings', 'SettingsController');

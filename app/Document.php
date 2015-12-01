@@ -56,16 +56,15 @@ class Document extends Model
 
     public static function countMergableDocuments()
     {
-        return DB::table('documents')
-            ->join('objects', 'objects.object_number', '=', 'documents.object_number')
-            ->count();
+        return Document::whereHas('object', function($query) {
+            $query->where('work_pid', '<>', '');
+        })
+        ->with('object')
+        ->count();
     }
 
     public static function countOrphanDocuments()
     {
-        return DB::table('documents')
-            ->leftJoin('objects', 'objects.object_number', '=', 'documents.object_number')
-            ->whereNull('objects.object_number')
-            ->count();
+        return Document::doesntHave('object')->count();
     }
 }
