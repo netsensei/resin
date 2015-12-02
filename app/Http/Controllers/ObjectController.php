@@ -24,6 +24,7 @@ class ObjectController extends Controller
     {
         $base_query = Object::where('work_pid', '=', '');
         $objects = $base_query->simplePaginate(20);
+
         return view('object.object', ['objects' => $objects]);
     }
 

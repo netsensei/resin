@@ -2,13 +2,27 @@
 
 @section('content')
 
-<div class="mergecount">
- <p>Resin will merge {{ $merge_count }} entities.</p>
+<div class="row page-title-row">
+  <div class="col-md-6">
+    <h3 class="pull-left">Uploads  </h3>
+  </div>
+  <div class="col-md-6 text-right">
+    <button type="button" class="btn btn-primary btn-md"
+            data-toggle="modal" data-target="#modal-init-merge">
+      <i class="fa fa-upload"></i> Merge
+    </button>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Resin will merge {{ $merge_count }} entities.</p>
+    </div>
 </div>
 
 <div class="entities">
     @if (count($documents) > 0)
-        <table class="table">
+        <table class="table" id="merge-table">
             <tr>
                 <th>PID</th>
                 <th>Entity type</th>
@@ -41,5 +55,15 @@
     @endif
 </div>
 
+@include('merge._modals')
 
 @endsection
+
+@section('scripts')
+  <script>
+    // Startup code
+    $(function() {
+      $("#merge-table").DataTable();
+    });
+  </script>
+@stop
