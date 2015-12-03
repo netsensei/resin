@@ -1,6 +1,4 @@
-
-
-{{-- Upload File Modal --}}
+{{-- Merge Modal --}}
 <div class="modal fade" id="modal-init-merge">
   <div class="modal-dialog">
     <div class="modal-content">

@@ -1,6 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
+
+<div class="row page-title-row">
+  <div class="col-md-6">
+    <h3 class="pull-left">Objects</h3>
+  </div>
+  <div class="col-md-6 text-right">
+    <button type="button" class="btn btn-primary btn-md"
+            data-toggle="modal" data-target="#modal-upload-objects">
+      <i class="fa fa-upload"></i> Upload objects
+    </button>
+  </div>
+</div>
+
 <div class="messages">
         @if(Session::has('success'))
           <div class="alert alert-success" role="alert">
@@ -8,23 +21,6 @@
           </div>
         @endif
 </div>
-
-<div class="upload-form">
-    {!! Form::open(array('url'=>'object/upload','method'=>'POST', 'files'=>true)) !!}
-        <div class="form-group">
-            <label>Objects upload</label>
-            {!! Form::file('objects_file', array('class' => 'form-control')) !!}
-            <p class="errors">{!!$errors->first('image')!!}</p>
-            @if(Session::has('error'))
-                <p class="errors">{!! Session::get('error') !!}</p>
-            @endif
-        </div>
-        <div id="success"> </div>
-        {!! Form::submit('Submit', array('class'=>'btn btn-default')) !!}
-    {!! Form::close() !!}
-</div>
-
-<hr />
 
 <div class="objects">
     @if (count($objects) > 0)
@@ -48,4 +44,7 @@
         <p>No objects yet!</p>
     @endif
 </div>
-@endsection
+
+@include('object._modals')
+
+@stop
