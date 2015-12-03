@@ -9,25 +9,22 @@
         @endif
 </div>
 
-<h2>Documents</h2>
+<div class="row page-title-row">
+  <div class="col-md-6">
+    <h3 class="pull-left">Documents</h3>
+  </div>
+  <div class="col-md-6 text-right">
+    <button type="button" class="btn btn-primary btn-md"
+            data-toggle="modal" data-target="#modal-upload-documents">
+      <i class="fa fa-upload"></i> Upload documents
+    </button>
+  </div>
+</div>
 
-<p>A document is a published resource. This can be a HTML, JSON or XML document
+<div class="row col-md-12">
+    <p>A document is a published resource. This can be a HTML, JSON or XML document
     or an image file. Documents can be related to objects through their associated
     object number. The overview below displays all registered documents.</p>
-
-<div class="upload-form">
-    {!! Form::open(array('url'=>'document/upload','method'=>'POST', 'files'=>true)) !!}
-        <div class="form-group">
-            <label>Documents upload</label>
-            {!! Form::file('documents_file', array('class' => 'form-control')) !!}
-            <p class="errors">{!!$errors->first('image')!!}</p>
-            @if(Session::has('error'))
-                <p class="errors">{!! Session::get('error') !!}</p>
-            @endif
-        </div>
-        <div id="success"> </div>
-        {!! Form::submit('Submit', array('class'=>'btn btn-default')) !!}
-    {!! Form::close() !!}
 </div>
 
 <hr />
@@ -56,4 +53,8 @@
         <p>No documents yet!</p>
     @endif
 </div>
-@endsection
+
+@include('document._modals')
+
+@stop
+

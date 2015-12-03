@@ -1,11 +1,18 @@
 @extends('layouts.master')
 
 @section('content')
-<h2>Orphan documents</h2>
 
+<div class="row page-title-row">
+  <div class="col-md-6">
+    <h3 class="pull-left">Orphan documents</h3>
+  </div>
+</div>
+
+<div class="row col-md-12">
 <p>Orphan documents are URL's that cannot be matched with any object through
     their object number either due to an error in the number or because the
     expected object simply is not registered in the database.</p>
+</div>
 
 <hr />
 
