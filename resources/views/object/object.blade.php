@@ -8,7 +8,8 @@
   </div>
   <div class="col-md-6 text-right">
     <button type="button" class="btn btn-primary btn-md"
-            data-toggle="modal" data-target="#modal-upload-objects">
+            data-toggle="modal" data-target="#modal-upload-objects"
+            id="button-upload-objects">
       <i class="fa fa-upload"></i> Upload objects
     </button>
   </div>

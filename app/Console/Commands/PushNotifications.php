@@ -46,14 +46,15 @@ class PushNotifications extends Command
     public function handle()
     {
         $loop   = Factory::create();
-        $pusher = new MergeNotification();
+        $mergeNotification = new MergeNotification();
 
         // Listen for the web server to make a ZeroMQ push after an ajax request
         $context = new Context($loop);
         $pull = $context->getSocket(\ZMQ::SOCKET_PULL);
         $pull->bind('tcp://127.0.0.1:5555'); // Binding to 127.0.0.1 means the only client that can connect is itself
 
-        $pull->on('message', array($pusher, 'onMergeComplete'));
+        $pull->on('message', array($mergeNotification, 'onMergeComplete'));
+        $pull->on('message', array($mergeNotification, 'onUploadComplete'));
 
         // Set up our WebSocket server for clients wanting real-time updates
         $webSock = new Server($loop);
@@ -62,7 +63,7 @@ class PushNotifications extends Command
             new HttpServer(
                 new WsServer(
                     new WampServer(
-                        $pusher
+                        $mergeNotification
                     )
                 )
             ),

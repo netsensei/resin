@@ -44,6 +44,16 @@ class MergeNotification implements WampServerInterface {
         $this->subscribedTopics[$topic->getId()] = $topic;
     }
 
+    public function onUploadComplete($uploadJob)
+    {
+        if (!array_key_exists('uploadJob', $this->subscribedTopics)) {
+            return;
+        }
+        $topic = $this->subscribedTopics['uploadJob'];
+
+        $topic->broadcast(json_decode($uploadJob));
+    }
+
     /**
      * @param string JSON'ified string we'll receive from ZeroMQ
      */
@@ -53,12 +63,11 @@ class MergeNotification implements WampServerInterface {
             'foo' => 'barrrr',
         ];
 
-var_dump($this->subscribedTopics);
-        if (!array_key_exists('foobar', $this->subscribedTopics)) {
+        if (!array_key_exists('mergeJob', $this->subscribedTopics)) {
             return;
         }
 
-        $topic = $this->subscribedTopics['foobar'];
+        $topic = $this->subscribedTopics['mergeJob'];
 
 
         $topic->broadcast($entryData);

@@ -21,6 +21,12 @@ class FileManager
         return '/' . trim(str_replace('..', '', $folder), '/');
     }
 
+    public function existsFile($path)
+    {
+        $path = $this->cleanFolder($path);
+        return $this->disk->exists($path);
+    }
+
     /**
     * Delete a file
     */
