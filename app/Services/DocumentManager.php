@@ -5,13 +5,13 @@ namespace Resin\Services;
 use Input;
 use SplFileInfo;
 
-use Resin\Object;
-use Resin\Jobs\ImportObjects;
+use Resin\Document;
+use Resin\Jobs\ImportDocuments;
 use Resin\Services\FileManager;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
-class ObjectManager
+class DocumentManager
 {
     use DispatchesJobs;
 
@@ -26,7 +26,7 @@ class ObjectManager
     {
         $fileName = $file->getFilename();
         if ($this->fileManager->existsFile($fileName)) {
-            $this->dispatch(new ImportObjects($file->getRealPath()));
+            $this->dispatch(new ImportDocuments($file->getRealPath()));
         } else {
             // Throw exception?
         }

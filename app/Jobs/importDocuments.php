@@ -4,30 +4,27 @@ namespace Resin\Jobs;
 
 use Resin\Document;
 use Resin\Jobs\Job;
-use Resin\Jobs\ChecksHTTPStatus;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use League\Csv\Reader;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Session;
 
 class ImportDocuments extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected $rows;
+    protected $path;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($rows)
+    public function __construct($path)
     {
-        $this->rows = $rows;
+        $this->path = $path;
     }
 
     /**
@@ -37,7 +34,13 @@ class ImportDocuments extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->rows as $row) {
+        $reader = Reader::createFromPath($this->path);
+
+        $read = 0;
+        $saved = 0;
+        foreach ($reader->fetchAssoc() as $row) {
+            $read++;
+
             $object_number = $row['object_number'];
             unset($row['object_number']);
             foreach ($row as $key => $value) {
@@ -54,8 +57,24 @@ class ImportDocuments extends Job implements SelfHandling, ShouldQueue
                     $document->order = (isset($order)) ? $order: "";
                 }
 
-                $document->save();
+                if ($document->save()) {
+                    $saved++;
+                }
             }
         }
+
+        $report = [
+            'type' => 'upload',
+            'data' => [
+                'read' => $read,
+                'saved' => $saved,
+            ]
+        ];
+        $message = json_encode($report);
+
+        $context = new \ZMQContext();
+        $socket = $context->getSocket(\ZMQ::SOCKET_PUSH, 'my pusher');
+        $socket->connect("tcp://localhost:5555");
+        $socket->send($message);
     }
 }

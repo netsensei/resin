@@ -24,6 +24,7 @@ class FileManager
     public function existsFile($path)
     {
         $path = $this->cleanFolder($path);
+        var_dump($this->disk);
         return $this->disk->exists($path);
     }
 
