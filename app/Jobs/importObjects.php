@@ -51,8 +51,11 @@ class ImportObjects extends Job implements SelfHandling, ShouldQueue
         }
 
         $report = [
-            'read' => $read,
-            'saved' => $saved,
+            'type' => 'upload',
+            'data' => [
+                'read' => $read,
+                'saved' => $saved,
+            ]
         ];
         $message = json_encode($report);
 

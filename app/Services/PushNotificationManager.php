@@ -5,7 +5,7 @@ namespace Resin\Services;
 use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\WampServerInterface;
 
-class MergeNotification implements WampServerInterface {
+class PushNotificationManager implements WampServerInterface {
     /**
      * A lookup of all the topics clients have subscribed to
      */
@@ -44,6 +44,23 @@ class MergeNotification implements WampServerInterface {
         $this->subscribedTopics[$topic->getId()] = $topic;
     }
 
+    // Turn this into an event emitter of sorts, register handlers as separate
+    // classes.
+    public function onMessage($message)
+    {
+        $data = json_decode($message, true);
+        if (isset($data['type'])) {
+            switch ($data['type']) {
+                case 'upload':
+                    $this->onUploadComplete($data['data']);
+                    break;
+                case 'merge':
+                    $this->onMergeComplete($data['data']);
+                    break;
+            }
+        }
+    }
+
     public function onUploadComplete($uploadJob)
     {
         if (!array_key_exists('uploadJob', $this->subscribedTopics)) {
@@ -51,7 +68,7 @@ class MergeNotification implements WampServerInterface {
         }
         $topic = $this->subscribedTopics['uploadJob'];
 
-        $topic->broadcast(json_decode($uploadJob));
+        $topic->broadcast($uploadJob);
     }
 
     /**
@@ -59,17 +76,12 @@ class MergeNotification implements WampServerInterface {
      */
     public function onMergeComplete($mergeJob)
     {
-        $entryData = [
-            'foo' => 'barrrr',
-        ];
-
         if (!array_key_exists('mergeJob', $this->subscribedTopics)) {
             return;
         }
 
         $topic = $this->subscribedTopics['mergeJob'];
 
-
-        $topic->broadcast($entryData);
+        $topic->broadcast($mergeJob);
     }
 }
