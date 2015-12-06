@@ -1,6 +1,6 @@
 <?php
 
-namespace Resin;
+namespace Resin\Models;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,7 @@ class Object extends Model
 
     public function documents()
     {
-        return $this->hasMany('Resin\Document', 'object_number', 'object_number');
+        return $this->hasMany('Resin\Models\Document', 'object_number', 'object_number');
     }
 
     public static function count()

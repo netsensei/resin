@@ -2,7 +2,7 @@
 
 namespace Resin\Services;
 
-use Resin\Document;
+use Resin\Models\Document;
 use Resin\Jobs\Merge;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;

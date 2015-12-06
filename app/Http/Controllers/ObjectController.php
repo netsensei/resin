@@ -8,7 +8,7 @@ use Session;
 
 use Illuminate\Http\Request;
 
-use Resin\Object;
+use Resin\Models\Object;
 use Resin\Services\ObjectManager;
 use Resin\Http\Controllers\Controller;
 

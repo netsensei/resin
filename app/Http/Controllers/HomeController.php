@@ -4,8 +4,8 @@ namespace Resin\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
-use Resin\Object;
-use Resin\Document;
+use Resin\Models\Object;
+use Resin\Models\Document;
 use Resin\Http\Requests;
 use Resin\Http\Controllers\Controller;
 

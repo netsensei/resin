@@ -5,7 +5,7 @@ namespace Resin\Services;
 use Input;
 use SplFileInfo;
 
-use Resin\Object;
+use Resin\Models\Object;
 use Resin\Jobs\ImportObjects;
 use Resin\Services\FileManager;
 

@@ -8,7 +8,7 @@ use Session;
 
 use Illuminate\Http\Request;
 
-use Resin\Document;
+use Resin\Models\Document;
 use Resin\Services\DocumentManager;
 use Resin\Http\Controllers\Controller;
 

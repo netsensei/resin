@@ -2,7 +2,7 @@
 
 namespace Resin\Jobs;
 
-use Resin\Document;
+use Resin\Models\Document;
 use Resin\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

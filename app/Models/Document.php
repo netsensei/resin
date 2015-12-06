@@ -1,6 +1,6 @@
 <?php
 
-namespace Resin;
+namespace Resin\Models;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +17,7 @@ class Document extends Model
 
     public function object()
     {
-        return $this->belongsTo('Resin\Object', 'object_number', 'object_number');
+        return $this->belongsTo('Resin\Models\Object', 'object_number', 'object_number');
     }
 
     public function getEntityTypeAttribute()

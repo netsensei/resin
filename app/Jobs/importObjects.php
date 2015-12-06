@@ -2,7 +2,7 @@
 
 namespace Resin\Jobs;
 
-use Resin\Object;
+use Resin\Models\Object;
 use Resin\Jobs\Job;
 
 use Session;
