@@ -12,6 +12,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use SplTempFileObject;
 use League\Csv\Writer;
+use Carbon\Carbon;
 
 
 class Merge extends Job implements SelfHandling, ShouldQueue
@@ -48,7 +49,10 @@ class Merge extends Job implements SelfHandling, ShouldQueue
 
         $output = (string) $writer;
 
-        $fileManager->saveFile('testttt.csv', $output);
+        $timestamp = Carbon::now();
+        $fileName = sprintf("import_%s.csv", $timestamp->format('dmY_His'));
+
+        $fileManager->saveFile($fileName, $output);
 
         $context = new \ZMQContext();
         $socket = $context->getSocket(\ZMQ::SOCKET_PUSH, 'my pusher');
