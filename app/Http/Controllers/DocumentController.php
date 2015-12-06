@@ -3,10 +3,10 @@
 namespace Resin\Http\Controllers;
 
 use HTML;
-use Request;
 use Validator;
-use Redirect;
 use Session;
+
+use Illuminate\Http\Request;
 
 use Resin\Document;
 use Resin\Services\DocumentManager;
@@ -33,31 +33,26 @@ class DocumentController extends Controller
         return view('document.orphans', ['documents' => $documents]);
     }
 
-    public function upload()
+    public function upload(Request $request)
     {
-          $file = array('documents_file' => Request::file('documents_file'));
-          $rules = array('documents_file' => 'required',);
-          $validator = Validator::make($file, $rules);
+        $validator = Validator::make($request->all(), [
+            'documents_file' => 'required|mimes:csv,txt',
+        ]);
 
-          if ($validator->fails()) {
-            return Redirect::to('document')->withInput()->withErrors($validator);
-          }
-          else {
-            if (Request::file('documents_file')->isValid()) {
-                $destinationPath = 'uploads';
-                $originalName = Request::file('documents_file')->getClientOriginalName();
-                $file = Request::file('documents_file')->move($destinationPath, $originalName);
+        if ($validator->fails()) {
+            return redirect('document')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
-                Session::flash('success', 'Upload successfully');
+        $destinationPath = 'uploads';
+        $originalName = $request->file('documents_file')->getClientOriginalName();
+        $file = $request->file('documents_file')->move($destinationPath, $originalName);
 
-                $this->documentManager->import($file);
+        Session::flash('success', 'Upload successfully');
 
-                return Redirect::to('document');
-            }
-            else {
-              Session::flash('error', 'uploaded file is not valid');
-              return Redirect::to('document');
-            }
-          }
+        $this->documentManager->import($file);
+
+        return redirect('document');
     }
 }

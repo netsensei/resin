@@ -3,10 +3,10 @@
 namespace Resin\Http\Controllers;
 
 use HTML;
-use Request;
 use Validator;
-use Redirect;
 use Session;
+
+use Illuminate\Http\Request;
 
 use Resin\Object;
 use Resin\Services\ObjectManager;
@@ -43,31 +43,26 @@ class ObjectController extends Controller
         return view('object.object', ['objects' => $objects]);
     }
 
-    public function upload()
+    public function upload(Request $request)
     {
-          $file = array('objects_file' => Request::file('objects_file'));
-          $rules = array('objects_file' => 'required',);
-          $validator = Validator::make($file, $rules);
+        $validator = Validator::make($request->all(), [
+            'objects_file' => 'required|mimes:csv,txt',
+        ]);
 
-          if ($validator->fails()) {
-            return Redirect::to('object')->withInput()->withErrors($validator);
-          }
-          else {
-            if (Request::file('objects_file')->isValid()) {
-                $destinationPath = 'uploads';
-                $originalName = Request::file('objects_file')->getClientOriginalName();
-                $file = Request::file('objects_file')->move($destinationPath, $originalName);
+        if ($validator->fails()) {
+            return redirect('object')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
-                Session::flash('success', 'Upload successfully');
+        $destinationPath = 'uploads';
+        $originalName = $request->file('objects_file')->getClientOriginalName();
+        $file = $request->file('objects_file')->move($destinationPath, $originalName);
 
-                $this->objectManager->import($file);
+        Session::flash('success', 'Upload successfully');
 
-                return Redirect::to('object');
-            }
-            else {
-              Session::flash('error', 'uploaded file is not valid');
-              return Redirect::to('object');
-            }
-          }
+        $this->objectManager->import($file);
+
+        return redirect('object');
     }
 }
