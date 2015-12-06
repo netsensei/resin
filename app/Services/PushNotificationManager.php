@@ -49,9 +49,11 @@ class PushNotificationManager implements WampServerInterface {
     public function onMessage($message)
     {
         $data = json_decode($message, true);
-        if (isset($data['type'])) {
-            switch ($data['type']) {
-                case 'upload':
+
+        if (isset($data['event'])) {
+            switch ($data['event']) {
+                case 'objects.imported':
+                case 'documents.imported':
                     $this->onUploadComplete($data['data']);
                     break;
                 case 'merge':

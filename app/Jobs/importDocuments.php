@@ -64,7 +64,7 @@ class ImportDocuments extends Job implements SelfHandling, ShouldQueue
         }
 
         $report = [
-            'type' => 'upload',
+            'event' => 'documents.imported',
             'data' => [
                 'read' => $read,
                 'saved' => $saved,

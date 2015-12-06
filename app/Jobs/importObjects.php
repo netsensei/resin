@@ -51,7 +51,7 @@ class ImportObjects extends Job implements SelfHandling, ShouldQueue
         }
 
         $report = [
-            'type' => 'upload',
+            'event' => 'objects.imported',
             'data' => [
                 'read' => $read,
                 'saved' => $saved,

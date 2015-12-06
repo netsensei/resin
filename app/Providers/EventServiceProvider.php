@@ -13,9 +13,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Resin\Events\SomeEvent' => [
-            'Resin\Listeners\EventListener',
-        ],
     ];
 
     /**
