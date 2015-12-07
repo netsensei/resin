@@ -3,15 +3,22 @@
 @section('content')
 
 <div class="row page-title-row">
-  <div class="col-md-6">
-    <h3 class="pull-left">Uploads  </h3>
-  </div>
-  <div class="col-md-6 text-right">
-    <button type="button" class="btn btn-primary btn-md"
-            data-toggle="modal" data-target="#modal-init-merge">
-      <i class="fa fa-upload"></i> Merge
-    </button>
-  </div>
+    <div class="col-md-7">
+        <h3 class="pull-left">Uploads  </h3>
+    </div>
+    <div class="col-md-5 text-right">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <p>Last generated on {{ $latest->created_at }} | {!! HTML::link('merge/latest', 'Download') !!}</p>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+                <button type="button" class="btn btn-primary btn-md"
+                        data-toggle="modal" data-target="#modal-init-merge">
+                  <i class="fa fa-upload"></i> Merge
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">

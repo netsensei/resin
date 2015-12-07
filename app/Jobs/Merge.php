@@ -3,6 +3,7 @@
 namespace Resin\Jobs;
 
 use Resin\Jobs\Job;
+use Resin\Models\Merger;
 use Resin\Services\MergeManager;
 use Resin\Services\FileManager;
 
@@ -32,6 +33,7 @@ class Merge extends Job implements SelfHandling, ShouldQueue
         $writer = Writer::createFromFileObject(new SplTempFileObject);
         $writer->insertOne($columns);
 
+        $count = 0;
         foreach ($items as $item) {
             $row = [
                 $item->object_number,
@@ -45,6 +47,7 @@ class Merge extends Job implements SelfHandling, ShouldQueue
             ];
 
             $writer->insertOne($row);
+            $count++;
         }
 
         $output = (string) $writer;
@@ -53,6 +56,11 @@ class Merge extends Job implements SelfHandling, ShouldQueue
         $fileName = sprintf("import_%s.csv", $timestamp->format('dmY_His'));
 
         $fileManager->saveFile($fileName, $output);
+
+        $merger = new Merger();
+        $merger->filename = $fileName;
+        $merger->documents = $count;
+        $merger->save();
 
         $context = new \ZMQContext();
         $socket = $context->getSocket(\ZMQ::SOCKET_PUSH, 'my pusher');

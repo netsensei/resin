@@ -13,6 +13,11 @@ class FileManager
         $this->disk = Storage::disk('local');
     }
 
+    public function getDiskPath()
+    {
+        return config('local');
+    }
+
     /**
      * Sanitize the folder name
      */
@@ -24,7 +29,6 @@ class FileManager
     public function existsFile($path)
     {
         $path = $this->cleanFolder($path);
-        var_dump($this->disk);
         return $this->disk->exists($path);
     }
 
@@ -54,5 +58,10 @@ class FileManager
         }
 
         return $this->disk->put($path, $content);
+    }
+
+    public function getContents($path)
+    {
+        return $this->disk->get($path);
     }
 }
