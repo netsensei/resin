@@ -5,6 +5,7 @@ namespace Resin\Http\Controllers;
 use DB;
 use Session;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use Resin\Http\Requests;
 use Resin\Http\Controllers\Controller;
@@ -45,6 +46,10 @@ class MergeController extends Controller
 
         $merger = $this->mergeManager->fetchLatestMergers(1)->pop();
         $contents = $this->fileManager->getContents($merger->filename);
+
+        $timestamp = Carbon::now();
+        $merger->downloaded = $timestamp->format('Y-m-d H:i:s');
+        $merger->save();
 
         $headers = [
             'Content-type' => 'text/csv',

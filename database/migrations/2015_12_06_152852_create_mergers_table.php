@@ -17,6 +17,7 @@ class CreateMergersTable extends Migration
             $table->string('filename');
             $table->integer('documents');
             $table->integer('objects');
+            $table->string('downloaded');
             $table->timestamps();
         });
     }
