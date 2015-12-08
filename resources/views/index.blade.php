@@ -47,7 +47,30 @@
     </div>
 
     <div class="col-md-4">
-        <h3>Latest imports</h3>
+        <div class="row">
+            <h3>Latest imports</h3>
+        </div>
+
+        <div class="row documents">
+            @if (count($mergers) > 0)
+                <table class="table">
+                    <tr>
+                        <th>Merger ID</th>
+                        <th>Created</th>
+                        <th>Last downloaded</th>
+                    </tr>
+                @foreach ($mergers as $merger)
+                    <tr>
+                        <td>{{ $merger->id}}</td>
+                        <td>{{ $merger->created_at}}</td>
+                        <td>{{ $merger->downloaded }}</td>
+                    </tr>
+                @endforeach
+                </table>
+            @else
+                <p>No Mergers yet!</p>
+            @endif
+        </div>
     </div>
 
 </div>
