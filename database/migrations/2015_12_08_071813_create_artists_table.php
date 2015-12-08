@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateObjectsTable extends Migration
+class CreateArtistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateObjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('objects', function (Blueprint $table) {
+        Schema::create('artists', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('object_number');
-            $table->string('title');
-            $table->string('work_pid');
-            $table->string('artist');
+            $table->string('name');
+            $table->integer('date_birth');
+            $table->integer('date_death');
+            $table->string('PID');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateObjectsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('objects');
+        Schema::drop('artists');
     }
 }

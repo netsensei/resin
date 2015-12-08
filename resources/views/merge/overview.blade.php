@@ -9,8 +9,12 @@
     <div class="col-md-6 text-right">
         <div class="row">
             <div class="col-xs-12 col-sm-8">
-                <div class="row">Last generated on {{ $latest->created_at }}</div>
-                <div class="row">Last downloaded on {{ $latest->downloaded }}</div>
+                @if (isset($latest))
+                    <div class="row">Last generated on {{ $latest->created_at }}</div>
+                    <div class="row">Last downloaded on {{ $latest->downloaded }}</div>
+                @else
+                    <div class="row">No mergers generated yet</div>
+                @endif
             </div>
             <div class="col-xs-4 col-sm-2">
                 {!! HTML::link('merge/latest', 'Download', array('class' => 'btn btn-primary btn-md')) !!}

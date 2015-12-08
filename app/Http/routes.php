@@ -26,6 +26,10 @@ Route::get('/document', 'DocumentController@index');
 Route::get('/document/orphans', 'DocumentController@orphans');
 Route::post('/document/upload', 'DocumentController@upload');
 
+Route::get('/artist', 'ArtistController@index');
+Route::get('/artist/protected', 'ArtistController@copyProtected');
+Route::get('/artist/public', 'ArtistController@copyPublic');
+
 Route::controller('/merge', 'MergeController');
 
 Route::controller('/settings', 'SettingsController');

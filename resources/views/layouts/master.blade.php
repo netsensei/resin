@@ -47,6 +47,14 @@
                 <li><a href="/document/orphans">Orphans</a></li>
               </ul>
             </li>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Artists <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/artist">All artists</a></li>
+                <li><a href="/artist/protected">Protected</a></li>
+                <li><a href="/artist/public">Public domain</a></li>
+              </ul>
+            </li>
             <li><a href="/merge">Merge</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>

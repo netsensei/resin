@@ -19,6 +19,8 @@ class SettingsController extends Controller
     {
         DB::table('documents')->truncate();
         DB::table('objects')->truncate();
+        DB::table('artists')->truncate();
+        DB::table('mergers')->truncate();
         Session::flash('success', 'Database successfully purged.');
         return view('database.purge');
     }
