@@ -43,6 +43,10 @@
                 <td># Orphan Documents</td>
                 <td>{{ $count_orphan_documents }}</td>
             </tr>
+            <tr>
+                <td># Artists</td>
+                <td>{{ $count_artists }}</td>
+            </tr>
         </table>
     </div>
 

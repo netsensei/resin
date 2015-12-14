@@ -29,6 +29,7 @@ Route::post('/document/upload', 'DocumentController@upload');
 Route::get('/artist', 'ArtistController@index');
 Route::get('/artist/protected', 'ArtistController@copyProtected');
 Route::get('/artist/public', 'ArtistController@copyPublic');
+Route::post('/artist/upload', 'ArtistController@upload');
 
 Route::controller('/merge', 'MergeController');
 

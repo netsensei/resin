@@ -52,6 +52,7 @@ class PushNotificationManager implements WampServerInterface {
 
         if (isset($data['event'])) {
             switch ($data['event']) {
+                case 'artists.imported':
                 case 'objects.imported':
                 case 'documents.imported':
                     $this->onUploadComplete($data['data']);

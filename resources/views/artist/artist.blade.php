@@ -31,16 +31,16 @@
         <table class="table">
             <tr>
                 <th>Artist name</th>
-                <th>Date of birth</th>
-                <th>Date of death</th>
+                <th>Year of birth</th>
+                <th>Year of death</th>
                 <th>PID</th>
             </tr>
         @foreach ($artists as $artist)
             <tr>
                 <td>{{ $artist->name}}</td>
-                <td>{{ $artist->date_birth }}</td>
-                <td>{{ $artist->date_death }}</td>
-                <td>{{ $artist->PID }}</td>
+                <td>{{ $artist->year_birth }}</td>
+                <td>{{ $artist->year_death }}</td>
+                <td>{!! HTML::link($artist->PID, str_limit($artist->PID, 100)) !!}</td>
             </tr>
         @endforeach
         </table>
@@ -50,4 +50,7 @@
         <p>No artists yet!</p>
     @endif
 </div>
+
+@include('artist._modals')
+
 @endsection

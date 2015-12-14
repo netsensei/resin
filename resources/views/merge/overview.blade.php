@@ -17,13 +17,25 @@
                 @endif
             </div>
             <div class="col-xs-4 col-sm-2">
-                {!! HTML::link('merge/latest', 'Download', array('class' => 'btn btn-primary btn-md')) !!}
+                @if (isset($latest))
+                    {!! HTML::link('merge/latest', 'Download', array('class' => 'btn btn-primary btn-md')) !!}
+                @else
+                    <button type="button" class="btn btn-primary btn-md disabled">
+                      <i class="fa fa-upload"></i> Download
+                    </button>
+                @endif
             </div>
             <div class="col-xs-4 col-sm-2">
-                <button type="button" class="btn btn-primary btn-md"
-                        data-toggle="modal" data-target="#modal-init-merge">
-                  <i class="fa fa-upload"></i> Merge
-                </button>
+                @if ($merge_count == 0)
+                    <button type="button" class="btn btn-primary btn-md disabled">
+                      <i class="fa fa-upload"></i> Merge
+                    </button>
+                @else
+                    <button type="button" class="btn btn-primary btn-md"
+                            data-toggle="modal" data-target="#modal-init-merge">
+                      <i class="fa fa-upload"></i> Merge
+                    </button>
+                @endif
             </div>
         </div>
     </div>
