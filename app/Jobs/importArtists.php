@@ -41,11 +41,13 @@ class ImportArtists extends Job implements SelfHandling, ShouldQueue
         $saved = 0;
         foreach ($reader->fetchAssoc() as $row) {
             $read++;
-            $artist = Artist::firstOrNew(['PID' => $row['PID']]);
+            $artist = Artist::firstOrNew(['artist_id' => $row['artist_id']]);
+            $artist->artist_id = $row['artist_id'];
             $artist->name = $row['name'];
             $artist->PID = $row['PID'];
             $artist->year_birth = $row['year_birth'];
             $artist->year_death = $row['year_death'];
+            $artist->copyright = $row['copyright'];
             if ($artist->save()) {
                 $saved++;
             }

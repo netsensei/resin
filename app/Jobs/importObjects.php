@@ -45,6 +45,7 @@ class ImportObjects extends Job implements SelfHandling, ShouldQueue
             $object = Object::firstOrNew(['object_number' => $row['object_number']]);
             $object->title = $row['title'];
             $object->work_pid = $row['work_pid'];
+            $object->artist_id = $row['artist_id'];
             if ($object->save()) {
                 $saved++;
             }

@@ -30,17 +30,21 @@
     @if (count($artists) > 0)
         <table class="table">
             <tr>
+                <th>Artist ID</th>
                 <th>Artist name</th>
                 <th>Year of birth</th>
                 <th>Year of death</th>
                 <th>PID</th>
+                <th>Copyright</th>
             </tr>
         @foreach ($artists as $artist)
             <tr>
+                <td>{{ $artist->artist_id}}</td>
                 <td>{{ $artist->name}}</td>
                 <td>{{ $artist->year_birth }}</td>
                 <td>{{ $artist->year_death }}</td>
                 <td>{!! HTML::link($artist->PID, str_limit($artist->PID, 100)) !!}</td>
+                <td>{{ $artist->copyright }}</td>
             </tr>
         @endforeach
         </table>

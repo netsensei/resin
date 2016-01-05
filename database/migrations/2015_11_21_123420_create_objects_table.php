@@ -17,7 +17,7 @@ class CreateObjectsTable extends Migration
             $table->string('object_number');
             $table->string('title');
             $table->string('work_pid');
-            $table->string('artist');
+            $table->string('artist_id');
             $table->timestamps();
         });
     }
