@@ -18,6 +18,7 @@ class CreateObjectsTable extends Migration
             $table->string('title');
             $table->string('work_pid');
             $table->string('artist_id');
+            $table->foreign('artist_id')->references('artist_id')->on('artists');
             $table->timestamps();
         });
     }
