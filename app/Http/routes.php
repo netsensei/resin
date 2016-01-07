@@ -18,6 +18,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/object', 'ObjectController@index');
+Route::get('/object/artist/{id}', 'ObjectController@byArtist');
 Route::get('/object/without-pid', 'ObjectController@withoutPid');
 Route::get('/object/with-pid', 'ObjectController@withPid');
 Route::post('/object/upload', 'ObjectController@upload');

@@ -13,6 +13,11 @@ class Object extends Model
 
     public $timestamps = false;
 
+    public function artist()
+    {
+        return $this->belongsTo('Resin\Models\Artist', 'artist_id', 'artist_id');
+    }
+
     public function documents()
     {
         return $this->hasMany('Resin\Models\Document', 'object_number', 'object_number');

@@ -43,6 +43,13 @@ class ObjectController extends Controller
         return view('object.object', ['objects' => $objects]);
     }
 
+    public function byArtist($id)
+    {
+        $base_query = Object::where('artist_id', $id);
+        $objects = $base_query->simplePaginate(20);
+        return view('object.object', ['objects' => $objects]);
+    }
+
     public function upload(Request $request)
     {
         $validator = Validator::make($request->all(), [

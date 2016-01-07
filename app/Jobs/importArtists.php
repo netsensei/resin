@@ -43,6 +43,7 @@ class ImportArtists extends Job implements SelfHandling, ShouldQueue
             $read++;
             $artist = Artist::firstOrNew(['artist_id' => $row['artist_id']]);
             $artist->artist_id = $row['artist_id'];
+            $artist->slug = $row['slug'];
             $artist->name = $row['name'];
             $artist->PID = $row['PID'];
             $artist->year_birth = $row['year_birth'];
